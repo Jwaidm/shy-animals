@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Waldtiere" />
+  <meta name="theme-color" content="#162b22" />
+  <title>Scheue Waldtiere</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="./icon.svg" />
+  <link id="apple-touch-icon" rel="apple-touch-icon" href="./icon.svg" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Fullscreen Responsive Forest Illustration -->
+    <svg
+      id="forest-svg"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1600 1200"
+      preserveAspectRatio="xMidYMax slice"
+      aria-label="Waldszene mit Reh, Hase, Dachs und Igel"
+    >
+      <defs>
+        <!-- Sky & Forest Mist Gradients -->
+        <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#152c23" />
+          <stop offset="32%" stop-color="#274f3e" />
+          <stop offset="64%" stop-color="#5d9471" />
+          <stop offset="85%" stop-color="#b7dca8" />
+          <stop offset="100%" stop-color="#dcedb9" />
+        </linearGradient>
+
+        <radialGradient id="gladeGlow" cx="50%" cy="56%" r="42%">
+          <stop offset="0%" stop-color="#fff9c7" stop-opacity="0.62" />
+          <stop offset="55%" stop-color="#d8f0b8" stop-opacity="0.22" />
+          <stop offset="100%" stop-color="#5c9370" stop-opacity="0" />
+        </radialGradient>
+
+        <linearGradient id="sunRayGrad" x1="0" y1="0" x2="0.25" y2="1">
+          <stop offset="0%" stop-color="#fff8c9" stop-opacity="0.26" />
+          <stop offset="65%" stop-color="#f7f2b2" stop-opacity="0.09" />
+          <stop offset="100%" stop-color="#f7f2b2" stop-opacity="0" />
+        </linearGradient>
+
+        <!-- Ground Gradients -->
+        <linearGradient id="farMeadow" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#598f5c" />
+          <stop offset="100%" stop-color="#3c6d45" />
+        </linearGradient>
+
+        <linearGradient id="midGlade" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#6ca35d" />
+          <stop offset="45%" stop-color="#497c47" />
+          <stop offset="100%" stop-color="#2c5434" />
+        </linearGradient>
+
+        <linearGradient id="foreMoss" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3c6e3f" />
+          <stop offset="100%" stop-color="#1b3822" />
+        </linearGradient>
+
+        <!-- Oak Trunk & Bark -->
+        <linearGradient id="oakBark" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#4e3829" />
+          <stop offset="55%" stop-color="#3b291d" />
+          <stop offset="100%" stop-color="#291c14" />
+        </linearGradient>
+
+        <!-- Woodland Puddle -->
+        <linearGradient id="puddleWater" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#8ec2b0" />
+          <stop offset="55%" stop-color="#588f82" />
+          <stop offset="100%" stop-color="#39665e" />
+        </linearGradient>
+
+        <clipPath id="puddleClip">
+          <ellipse cx="775" cy="1096" rx="74" ry="19" />
+        </clipPath>
+
+        <!-- Storm / Loud Wind Tint -->
+        <linearGradient id="windTintGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0f2224" stop-opacity="0.65" />
+          <stop offset="100%" stop-color="#162c28" stop-opacity="0.45" />
+        </linearGradient>
+      </defs>
+
+      <!-- 1. SKY & SUNLIT GLADE ATMOSPHERE -->
+      <rect x="0" y="0" width="1600" height="1200" fill="url(#skyGrad)" />
+      <ellipse cx="800" cy="650" rx="620" ry="460" fill="url(#gladeGlow)" />
+
+      <!-- 2. DISTANT MISTY FOREST SILHOUETTES -->
+      <g opacity="0.52" fill="#2b5542">
+        <path d="M0 760 L0 360 L65 240 L125 365 L190 210 L255 370 L325 260 L390 390 L460 275 L520 420 L585 310 L645 450 L700 365 L750 480 L850 480 L905 355 L965 455 L1030 300 L1095 430 L1165 265 L1235 395 L1305 225 L1380 375 L1455 235 L1530 365 L1600 260 L1600 760 Z" />
+      </g>
+
+      <!-- Distant Tall Tree Trunks in Glade Background -->
+      <g fill="#36634d" opacity="0.65">
+        <rect x="595" y="140" width="22" height="580" rx="4" />
+        <rect x="668" y="180" width="16" height="540" rx="3" />
+        <rect x="748" y="160" width="14" height="540" rx="3" />
+        <rect x="862" y="150" width="18" height="550" rx="3" />
+        <rect x="935" y="170" width="24" height="550" rx="4" />
+      </g>
+
+      <!-- Mid-distance Conifers & Deciduous Trees -->
+      <g fill="#214434">
+        <!-- Left forest wing -->
+        <path d="M-40 790 L65 260 L170 790 Z" />
+        <path d="M95 790 L205 210 L315 790 Z" />
+        <path d="M235 790 L335 290 L435 790 Z" />
+        <path d="M365 790 L455 320 L545 790 Z" />
+        <path d="M475 785 L548 390 L620 785 Z" opacity="0.85" />
+        <!-- Right forest wing -->
+        <path d="M985 785 L1058 380 L1132 785 Z" opacity="0.85" />
+        <path d="M1065 790 L1155 305 L1245 790 Z" />
+        <path d="M1180 790 L1285 235 L1390 790 Z" />
+        <path d="M1310 790 L1425 195 L1540 790 Z" />
+        <path d="M1445 790 L1555 265 L1660 790 Z" />
+      </g>
+
+      <!-- 3. GOLDEN SUNBEAMS -->
+      <g id="sunbeams">
+        <polygon points="610,0 715,0 855,920 675,920" fill="url(#sunRayGrad)" />
+        <polygon points="755,0 855,0 995,940 815,940" fill="url(#sunRayGrad)" />
+        <polygon points="500,0 570,0 685,860 560,860" fill="url(#sunRayGrad)" opacity="0.7" />
+      </g>
+
+      <!-- 4. ROLLING FOREST CLEARING GROUND -->
+      <!-- Far sunlit slope -->
+      <path d="M0 745 Q420 690 800 712 Q1180 734 1600 695 L1600 920 L0 920 Z" fill="url(#farMeadow)" />
+      <!-- Main clearing meadow -->
+      <path d="M0 805 Q460 755 815 775 Q1190 795 1600 760 L1600 1200 L0 1200 Z" fill="url(#midGlade)" />
+
+      <!-- Soft sunlit patches on the clearing grass -->
+      <ellipse cx="765" cy="835" rx="185" ry="32" fill="#a8d884" opacity="0.28" />
+      <ellipse cx="780" cy="965" rx="225" ry="48" fill="#9ed17b" opacity="0.22" />
+      <ellipse cx="775" cy="1095" rx="170" ry="38" fill="#8bc26c" opacity="0.18" />
+
+      <!-- Subtle meadow wildflowers & grass tufts -->
+      <g stroke="#396839" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.7">
+        <path d="M720 825 q-4 -12 -9 -16 M724 826 q2 -14 7 -18" />
+        <path d="M835 860 q-5 -11 -10 -15 M840 860 q3 -12 8 -15" />
+        <path d="M715 935 q-5 -13 -11 -17 M720 936 q4 -14 9 -18" />
+        <path d="M845 948 q-4 -12 -8 -17 M850 948 q4 -11 9 -15" />
+      </g>
+      <g fill="#f7f5d7" opacity="0.85">
+        <circle cx="712" cy="807" r="3" />
+        <circle cx="732" cy="806" r="2.5" />
+        <circle cx="826" cy="843" r="2.8" />
+        <circle cx="705" cy="916" r="3.2" />
+        <circle cx="859" cy="931" r="3" />
+      </g>
+
+      <!-- Framing Woodland Trees (Left & Right of Stage) -->
+      <g id="framing-trees">
+        <!-- Tall Beech / Birch on Left -->
+        <path d="M435 0 C450 280 462 560 442 865 L505 865 C492 560 495 280 512 0 Z" fill="#3a2a1e" />
+        <path d="M498 320 Q565 285 615 240" stroke="#3a2a1e" stroke-width="14" stroke-linecap="round" fill="none" />
+        <!-- Grand Old Oak on Right (houses Badger's root burrow!) -->
+        <path d="M1045 0 C1035 310 1025 560 985 835 L1145 855 C1115 570 1118 300 1135 0 Z" fill="url(#oakBark)" />
+        <path d="M1042 270 Q960 225 895 190" stroke="#3d2b1f" stroke-width="18" stroke-linecap="round" fill="none" />
+      </g>
+
+      <!-- =========================================================
+           ANIMAL 1: REH (Roe Deer) — Midground Left (Shyness #2)
+           ========================================================= -->
+      <!-- Back foliage behind deer -->
+      <g fill="#234a35">
+        <circle cx="555" cy="735" r="68" />
+        <circle cx="610" cy="755" r="52" />
+      </g>
+
+      <g id="slot-deer" class="animal-slot" data-state="visible" transform="translate(685, 815)">
+        <g class="animal-mover">
+          <!-- Soft ground shadow -->
+          <ellipse cx="0" cy="3" rx="46" ry="9" fill="#1d3b24" opacity="0.38" />
+
+          <!-- Back legs -->
+          <path d="M-26 -42 L-30 -2 L-23 -2 L-17 -42 Z" fill="#9c552c" />
+          <path d="M14 -42 L18 -2 L25 -2 L21 -42 Z" fill="#9c552c" />
+          <!-- Hooves -->
+          <rect x="-31" y="-4" width="8" height="5" rx="2" fill="#2d1e17" />
+          <rect x="18" y="-4" width="8" height="5" rx="2" fill="#2d1e17" />
+
+          <!-- Fluffy white tail (Spiegel) -->
+          <ellipse cx="-41" cy="-58" rx="8" ry="11" transform="rotate(-18 -41 -58)" fill="#f5ead8" />
+          <ellipse cx="-42" cy="-62" rx="6" ry="7" fill="#b86b3d" />
+
+          <!-- Torso -->
+          <ellipse cx="-5" cy="-56" rx="40" ry="24" transform="rotate(-4 -5 -56)" fill="#c27343" />
+          <!-- Cream belly -->
+          <path d="M-34 -44 Q-4 -34 26 -45 Q6 -40 -34 -44 Z" fill="#efd9c1" />
+          <!-- Delicate fawn spots -->
+          <g fill="#f4e3ce" opacity="0.72">
+            <ellipse cx="-22" cy="-64" rx="4" ry="2.6" />
+            <ellipse cx="-9" cy="-68" rx="4.2" ry="2.6" />
+            <ellipse cx="4" cy="-63" rx="3.8" ry="2.4" />
+            <ellipse cx="-15" cy="-56" rx="3.6" ry="2.3" />
+            <ellipse cx="-1" cy="-54" rx="3.5" ry="2.2" />
+          </g>
+
+          <!-- Front legs -->
+          <path d="M-34 -45 L-38 0 L-31 0 L-24 -44 Z" fill="#b86b3d" />
+          <path d="M19 -46 L24 0 L31 0 L28 -46 Z" fill="#b86b3d" />
+          <rect x="-39" y="-3" width="8" height="5" rx="2" fill="#2d1e17" />
+          <rect x="24" y="-3" width="8" height="5" rx="2" fill="#2d1e17" />
+
+          <!-- Neck & Articulated Head -->
+          <g class="deer-head-group">
+            <!-- Graceful neck -->
+            <path d="M14 -64 L28 -108 L46 -102 L33 -52 Z" fill="#c27343" />
+            <path d="M26 -56 L38 -100 L45 -98 L33 -52 Z" fill="#edd5bc" />
+
+            <!-- Back Ear -->
+            <g class="deer-ear-left">
+              <ellipse cx="26" cy="-124" rx="7.5" ry="18" transform="rotate(-26 26 -124)" fill="#a85c31" />
+              <ellipse cx="27" cy="-123" rx="4" ry="11" transform="rotate(-26 27 -123)" fill="#ebcab5" />
+            </g>
+
+            <!-- Front Ear -->
+            <g class="deer-ear-right">
+              <ellipse cx="40" cy="-124" rx="8" ry="18" transform="rotate(14 40 -124)" fill="#bf7040" />
+              <ellipse cx="40" cy="-122" rx="4.2" ry="11" transform="rotate(14 40 -122)" fill="#f0d2be" />
+            </g>
+
+            <!-- Head & Snout -->
+            <ellipse cx="43" cy="-103" rx="17" ry="13" transform="rotate(10 43 -103)" fill="#c97948" />
+            <path d="M46 -111 L68 -101 Q71 -96 66 -92 L45 -92 Z" fill="#c97948" />
+            <!-- Pale chin -->
+            <path d="M46 -94 L66 -93 Q63 -89 52 -90 Z" fill="#f3e1cc" />
+            <!-- Dark nose -->
+            <ellipse cx="67.5" cy="-97.5" rx="4.2" ry="3.4" fill="#261913" />
+            <!-- Gentle dark eye with catchlight -->
+            <circle cx="46" cy="-104" r="4.1" fill="#211510" />
+            <circle cx="47.3" cy="-105.4" r="1.4" fill="#ffffff" />
+          </g>
+        </g>
+      </g>
+
+      <!-- COVER FOR DEER: Dense Spruce & Hazel Bush Thicket (x: 450..650) -->
+      <g id="cover-deer" class="cover-group sway-slow">
+        <!-- Young spruce tree -->
+        <path d="M455 835 L525 585 L595 835 Z" fill="#1f4732" />
+        <path d="M470 765 L525 565 L580 765 Z" fill="#29593e" />
+        <path d="M485 695 L525 545 L565 695 Z" fill="#346b4b" />
+        <!-- Lush rounded hazel bush -->
+        <ellipse cx="545" cy="790" rx="76" ry="52" fill="#29583a" />
+        <circle cx="515" cy="770" r="46" fill="#356b46" />
+        <circle cx="575" cy="772" r="48" fill="#356b46" />
+        <circle cx="614" cy="792" r="40" fill="#3f794f" />
+        <circle cx="555" cy="748" r="40" fill="#468355" />
+        <!-- Leaf highlights & woodland berries -->
+        <circle cx="595" cy="765" r="24" fill="#549460" opacity="0.7" />
+        <circle cx="626" cy="786" r="22" fill="#549460" opacity="0.65" />
+        <circle cx="585" cy="788" r="3.5" fill="#d45745" />
+        <circle cx="594" cy="795" r="3" fill="#d45745" />
+        <circle cx="618" cy="802" r="3.2" fill="#d45745" />
+      </g>
+
+      <!-- =========================================================
+           ANIMAL 3: DACHS (Badger) — Midground Right (Shyness #3)
+           ========================================================= -->
+      <!-- Dark Oak Root Burrow Interior (Behind Badger) -->
+      <g id="burrow-back">
+        <ellipse cx="1012" cy="842" rx="62" ry="44" fill="#17120e" />
+        <ellipse cx="1002" cy="846" rx="48" ry="34" fill="#0e0b08" />
+      </g>
+
+      <g id="slot-badger" class="animal-slot" data-state="visible" transform="translate(915, 845)">
+        <g class="animal-mover">
+          <!-- Shadow -->
+          <ellipse cx="8" cy="3" rx="46" ry="9" fill="#1b3622" opacity="0.42" />
+
+          <!-- Short dark back legs -->
+          <ellipse cx="-16" cy="-6" rx="9" ry="7" fill="#25282b" />
+          <ellipse cx="32" cy="-6" rx="10" ry="7" fill="#25282b" />
+
+          <!-- Bushy tail -->
+          <ellipse cx="55" cy="-26" rx="14" ry="8" transform="rotate(18 55 -26)" fill="#7d8388" />
+
+          <!-- Stocky silver-grey body -->
+          <path d="M-26 -22 C-28 -54 46 -58 52 -20 C54 -6 36 -4 -22 -5 Z" fill="#6d7378" />
+          <!-- Frosted lighter grey back highlight -->
+          <path d="M-18 -38 C2 -52 38 -50 46 -28 C28 -36 -2 -36 -18 -38 Z" fill="#959ba0" opacity="0.7" />
+          <!-- Dark underbelly & front legs -->
+          <ellipse cx="-10" cy="-4" rx="10" ry="6.5" fill="#2b2e31" />
+          <ellipse cx="26" cy="-4" rx="10" ry="6.5" fill="#2b2e31" />
+
+          <!-- Articulated Iconic Black-and-White Striped Head -->
+          <g class="badger-head-group">
+            <!-- Crisp white head base -->
+            <path d="M-14 -43 C-32 -45 -50 -34 -57 -21 C-59 -16 -52 -13 -42 -13 L-12 -15 Z" fill="#f3f0e8" />
+            <!-- Characteristic bold black badger stripe -->
+            <path d="M-15 -39 C-28 -39 -42 -31 -49 -23 C-44 -20 -31 -23 -14 -26 Z" fill="#222528" />
+            <!-- Small rounded dark ear with white rim -->
+            <circle cx="-19" cy="-41" r="6.5" fill="#222528" />
+            <circle cx="-19" cy="-42" r="4" fill="#f3f0e8" />
+            <!-- Bright eye inside stripe -->
+            <circle cx="-35" cy="-28" r="3.1" fill="#111315" />
+            <circle cx="-36" cy="-29.2" r="1.1" fill="#ffffff" />
+            <!-- Dark nose tip -->
+            <ellipse cx="-56.5" cy="-19" rx="4.2" ry="3.5" fill="#1c1e20" />
+          </g>
+        </g>
+      </g>
+
+      <!-- COVER FOR BADGER: Overhanging Gnarled Oak Roots & Mossy Burrow Hood (x: 972..1165) -->
+      <g id="cover-badger" class="cover-group">
+        <!-- Gnarled oak root arch framing the burrow right side & roof -->
+        <path d="M956 806 Q995 776 1055 785 L1155 795 L1155 865 L973 865 Q976 822 956 806 Z" fill="#463122" />
+        <path d="M952 806 Q990 765 1068 772 Q1115 778 1155 795 L1155 822 Q1060 798 974 818 Z" fill="#3c6e42" />
+        <!-- Mossy cushions & bracket fungi on oak trunk -->
+        <ellipse cx="1028" cy="792" rx="48" ry="18" fill="#4d8751" />
+        <ellipse cx="1085" cy="818" rx="56" ry="26" fill="#36663c" />
+        <ellipse cx="1008" cy="848" rx="38" ry="20" fill="#2e5934" />
+        <!-- Shelf mushrooms on oak -->
+        <ellipse cx="1072" cy="712" rx="18" ry="6" fill="#cfa26e" />
+        <ellipse cx="1086" cy="726" rx="14" ry="5" fill="#bd8d58" />
+      </g>
+
+      <!-- =========================================================
+           FOREGROUND MOSSY GLADE FLOOR & SOUND PUDDLE
+           ========================================================= -->
+      <path d="M0 1015 Q420 975 800 995 Q1180 1015 1600 980 L1600 1200 L0 1200 Z" fill="url(#foreMoss)" opacity="0.65" />
+
+      <!-- Woodland Puddle (Reflects sky & ripples with live sound!) -->
+      <g id="sound-puddle">
+        <ellipse cx="775" cy="1098" rx="80" ry="22" fill="#264b33" />
+        <ellipse cx="775" cy="1096" rx="74" ry="19" fill="url(#puddleWater)" />
+        <!-- Sky glint -->
+        <ellipse cx="755" cy="1091" rx="34" ry="6" fill="#d9f0df" opacity="0.28" />
+        <!-- Dynamic Sound Ripples Container -->
+        <g id="puddle-ripples" clip-path="url(#puddleClip)"></g>
+        <!-- Small mossy pebbles at puddle rim -->
+        <ellipse cx="702" cy="1099" rx="11" ry="5.5" fill="#4f6356" />
+        <ellipse cx="716" cy="1104" rx="7" ry="3.8" fill="#63786a" />
+        <ellipse cx="846" cy="1094" rx="9.5" ry="4.8" fill="#4d6154" />
+      </g>
+
+      <!-- =========================================================
+           ANIMAL 2: HASE (European Hare) — Foreground Left (Shyness #1 - Most Skittish!)
+           ========================================================= -->
+      <g id="slot-hare" class="animal-slot" data-state="visible" transform="translate(665, 995)">
+        <g class="animal-mover">
+          <!-- Shadow -->
+          <ellipse cx="0" cy="3" rx="34" ry="7.5" fill="#17301d" opacity="0.42" />
+
+          <!-- Fluffy cotton tail -->
+          <circle cx="-31" cy="-14" r="9" fill="#f3ece0" />
+
+          <!-- Rounded haunch & tawny body -->
+          <ellipse cx="-8" cy="-23" rx="25" ry="20" transform="rotate(-12 -8 -23)" fill="#9e7044" />
+          <ellipse cx="-13" cy="-13" rx="16" ry="11" fill="#8c6038" />
+          <!-- Hind foot -->
+          <ellipse cx="-4" cy="-3" rx="14" ry="5" fill="#b58759" />
+
+          <!-- Warm cream chest & front paws -->
+          <path d="M6 -38 Q24 -30 22 -4 L10 -4 Q8 -22 6 -38 Z" fill="#dfc4a0" />
+          <path d="M11 -26 L16 -1 L22 -1 L19 -26 Z" fill="#ab7c4e" />
+          <ellipse cx="19" cy="-2" rx="6" ry="3.5" fill="#c79c70" />
+
+          <!-- Back Long Ear -->
+          <g class="hare-ear-back">
+            <ellipse cx="14" cy="-84" rx="6.2" ry="26" transform="rotate(-14 14 -84)" fill="#96683e" />
+            <path d="M6 -102 Q9 -110 13 -108 Q15 -101 12 -96 Z" fill="#231c17" />
+          </g>
+
+          <!-- Front Long Ear -->
+          <g class="hare-ear-front">
+            <ellipse cx="22" cy="-83" rx="6.8" ry="26" transform="rotate(-4 22 -83)" fill="#ad7d50" />
+            <ellipse cx="22" cy="-81" rx="3.5" ry="17" transform="rotate(-4 22 -81)" fill="#e6c4aa" />
+            <path d="M18 -101 Q21 -110 25 -107 Q26 -100 24 -95 Z" fill="#231c17" />
+          </g>
+
+          <!-- Hare Head -->
+          <ellipse cx="24" cy="-51" rx="16" ry="13" transform="rotate(6 24 -51)" fill="#ad7d50" />
+          <ellipse cx="33" cy="-47" rx="9" ry="7.5" fill="#dfc4a0" />
+          <!-- Bright attentive eye -->
+          <circle cx="26" cy="-54" r="3.8" fill="#211610" />
+          <circle cx="27.2" cy="-55.3" r="1.3" fill="#ffffff" />
+          <!-- Pinkish-brown nose -->
+          <ellipse cx="40" cy="-48" rx="3" ry="2.4" fill="#59362b" />
+        </g>
+      </g>
+
+      <!-- COVER FOR HARE: Lush Woodland Fern Cluster & Mossy Boulder (x: 465..620) -->
+      <g id="cover-hare" class="cover-group sway-medium">
+        <!-- Mossy boulder -->
+        <path d="M475 1035 Q485 968 552 972 Q608 976 618 1035 Z" fill="#3a5e44" />
+        <path d="M490 1005 Q535 968 592 988 Q555 998 490 1005 Z" fill="#528258" />
+        <!-- Layered arching fern fronds -->
+        <path d="M545 1035 Q505 955 455 925 Q515 930 560 1015 Z" fill="#2d613b" />
+        <path d="M555 1035 Q535 940 498 898 Q552 922 575 1020 Z" fill="#3c7849" />
+        <path d="M565 1035 Q575 938 558 892 Q595 930 588 1025 Z" fill="#4b8c56" />
+        <path d="M572 1035 Q605 952 624 918 Q622 968 598 1032 Z" fill="#579c61" />
+        <path d="M580 1038 Q618 982 634 965 Q626 1005 604 1038 Z" fill="#3f7d4b" />
+        <!-- Fern frond center ribs -->
+        <path d="M562 1028 Q540 955 502 904" stroke="#6eb375" stroke-width="2" fill="none" opacity="0.65" />
+        <path d="M582 1028 Q602 965 621 924" stroke="#7ec284" stroke-width="2" fill="none" opacity="0.65" />
+      </g>
+
+      <!-- =========================================================
+           ANIMAL 4: IGEL (Hedgehog) — Foreground Right (Shyness #4 - Bravest!)
+           ========================================================= -->
+      <!-- Hollow Log Dark Interior (Behind Hedgehog) -->
+      <ellipse cx="975" cy="1026" rx="44" ry="26" fill="#1c130d" />
+
+      <g id="slot-hedgehog" class="animal-slot" data-state="visible" transform="translate(885, 1035)">
+        <g class="animal-mover">
+          <g class="hedgehog-body-idle">
+            <!-- Shadow -->
+            <ellipse cx="0" cy="3" rx="34" ry="6.5" fill="#152b1a" opacity="0.45" />
+
+            <!-- Open / Walking Hedgehog Pose -->
+            <g class="hedgehog-open">
+              <!-- Tiny paws -->
+              <ellipse cx="-20" cy="-2" rx="6.5" ry="3.5" fill="#6b4c38" />
+              <ellipse cx="14" cy="-2" rx="6.5" ry="3.5" fill="#6b4c38" />
+
+              <!-- Spiky cocoa & cream coat -->
+              <path d="M-18 -10 L-24 -22 L-15 -25 L-18 -36 L-7 -35 L-6 -45 L4 -39 L10 -47 L17 -38 L27 -43 L28 -32 L38 -33 L33 -22 L40 -15 L31 -8 Z" fill="#543c2a" />
+              <path d="M-13 -12 L-18 -21 L-10 -24 L-12 -33 L-3 -32 L-2 -40 L6 -35 L12 -41 L17 -34 L25 -37 L25 -28 L33 -28 L29 -19 L33 -12 Z" fill="#78583f" />
+              <!-- Cream spine tips -->
+              <g stroke="#d9c09e" stroke-width="2" stroke-linecap="round">
+                <line x1="-8" y1="-32" x2="-12" y2="-37" />
+                <line x1="2" y1="-35" x2="0" y2="-41" />
+                <line x1="12" y1="-35" x2="13" y2="-42" />
+                <line x1="22" y1="-31" x2="25" y2="-37" />
+                <line x1="27" y1="-22" x2="33" y2="-25" />
+                <line x1="4" y1="-25" x2="6" y2="-30" />
+                <line x1="16" y1="-24" x2="20" y2="-28" />
+              </g>
+
+              <!-- Warm tan fuzzy belly & upturned snout -->
+              <path d="M-14 -32 C-26 -31 -36 -23 -45 -18 C-47 -16 -45 -12 -39 -10 C-29 -6 -16 -5 16 -6 C10 -18 -2 -30 -14 -32 Z" fill="#cfa67a" />
+              <!-- Cute rounded ear -->
+              <circle cx="-13" cy="-27" r="5" fill="#9c734f" />
+              <!-- Glossy black nose bead -->
+              <circle cx="-45.5" cy="-17.5" r="3.4" fill="#1d1410" />
+              <circle cx="-46.5" cy="-18.5" r="1" fill="#ffffff" />
+              <!-- Bright dark eye -->
+              <circle cx="-27" cy="-21" r="2.9" fill="#1d1410" />
+              <circle cx="-27.8" cy="-22" r="1" fill="#ffffff" />
+            </g>
+
+            <!-- Curled Spiky Ball Pose (shown when hiding) -->
+            <g class="hedgehog-curled">
+              <circle cx="4" cy="-21" r="23" fill="#543c2a" />
+              <path d="M-18 -14 L-23 -23 L-14 -28 L-16 -38 L-5 -37 L-2 -46 L7 -39 L15 -45 L20 -36 L29 -37 L26 -26 L31 -18 L22 -11 Z" fill="#6b4d37" />
+            </g>
+          </g>
+        </g>
+      </g>
+
+      <!-- COVER FOR HEDGEHOG: Mossy Hollow Log, Autumn Oak Leaves & Toadstools (x: 932..1145) -->
+      <g id="cover-hedgehog" class="cover-group">
+        <!-- Fallen hollow log -->
+        <path d="M956 992 C995 978 1075 982 1138 996 L1145 1052 C1075 1056 995 1054 962 1046 C974 1025 972 1004 956 992 Z" fill="#4f3726" />
+        <!-- Moss blanket atop log -->
+        <path d="M960 993 C1002 975 1078 978 1135 995 C1105 1008 1025 1012 966 1004 Z" fill="#4f8a52" />
+        <!-- Pile of warm autumn oak leaves at log opening (starts at x=932) -->
+        <ellipse cx="956" cy="1038" rx="28" ry="14" fill="#b56c31" />
+        <ellipse cx="978" cy="1042" rx="30" ry="15" fill="#9c5523" />
+        <ellipse cx="946" cy="1045" rx="22" ry="11" fill="#cf863c" />
+        <ellipse cx="968" cy="1030" rx="20" ry="10" fill="#d99848" />
+        <!-- Cute red-and-white toadstools (Fliegenpilze) -->
+        <rect x="1028" y="1026" width="6" height="18" rx="3" fill="#f2eadc" />
+        <path d="M1014 1028 Q1031 1006 1048 1028 Z" fill="#cf4336" />
+        <circle cx="1025" cy="1021" r="2" fill="#ffffff" />
+        <circle cx="1034" cy="1018" r="2.2" fill="#ffffff" />
+        <circle cx="1040" cy="1024" r="1.7" fill="#ffffff" />
+
+        <rect x="1052" y="1033" width="4.5" height="12" rx="2" fill="#f2eadc" />
+        <path d="M1043 1035 Q1054 1020 1065 1035 Z" fill="#d95343" />
+        <circle cx="1051" cy="1029" r="1.5" fill="#ffffff" />
+        <circle cx="1058" cy="1031" r="1.4" fill="#ffffff" />
+      </g>
+
+      <!-- =========================================================
+           TOP OVERHANGING LEAFY CANOPY (Frames Portrait & Desktop)
+           ========================================================= -->
+      <g id="top-canopy" class="sway-slow">
+        <path d="M0 0 L1600 0 L1600 185 Q1420 245 1260 155 Q1115 215 985 115 Q865 165 785 95 Q690 175 565 115 Q435 220 295 155 Q145 245 0 195 Z" fill="#163024" />
+        <g fill="#214634" opacity="0.9">
+          <circle cx="515" cy="95" r="78" />
+          <circle cx="635" cy="68" r="68" />
+          <circle cx="775" cy="48" r="64" />
+          <circle cx="925" cy="65" r="72" />
+          <circle cx="1065" cy="98" r="82" />
+        </g>
+        <g fill="#2f5e44" opacity="0.65">
+          <circle cx="580" cy="88" r="48" />
+          <circle cx="710" cy="58" r="44" />
+          <circle cx="855" cy="56" r="46" />
+          <circle cx="995" cy="86" r="52" />
+        </g>
+      </g>
+
+      <!-- Foreground framing grass silhouettes at very bottom -->
+      <g fill="#132919">
+        <path d="M0 1200 L0 1135 Q180 1165 390 1148 Q610 1175 800 1164 Q1010 1176 1220 1146 Q1420 1165 1600 1132 L1600 1200 Z" />
+        <path d="M565 1175 l-10 -34 l16 32 M580 1175 l4 -40 l6 40 M1010 1175 l-8 -36 l14 36 M1028 1175 l8 -32 l2 32" />
+      </g>
+
+      <!-- Subtle cool atmospheric veil when wind/noise rises -->
+      <rect id="wind-veil" x="0" y="0" width="1600" height="1200" fill="url(#windTintGrad)" />
+    </svg>
+
+    <!-- Atmospheric Particles Canvas (Fireflies when quiet, Wind & Leaves when loud) -->
+    <canvas id="fx-canvas"></canvas>
+
+    <!-- Minimal Top HUD -->
+    <div class="hud-top">
+      <!-- Atmospheric Sound & Calm-Ring Indicator -->
+      <button
+        id="ambient-indicator"
+        class="ambient-indicator"
+        type="button"
+        title="Einstellungen öffnen"
+        aria-label="Geräuschpegel-Anzeige"
+      >
+        <svg class="calm-ring-svg" viewBox="0 0 68 68">
+          <circle
+            class="calm-ring-track"
+            cx="34"
+            cy="34"
+            r="30"
+          />
+          <circle
+            id="calm-ring"
+            class="calm-ring-progress"
+            cx="34"
+            cy="34"
+            r="30"
+          />
+        </svg>
+        <span class="ambient-reeds" aria-hidden="true">
+          <span class="reed" id="reed-1"></span>
+          <span class="reed" id="reed-2"></span>
+          <span class="reed" id="reed-3"></span>
+          <span class="reed" id="reed-4"></span>
+          <span class="reed" id="reed-5"></span>
+        </span>
+      </button>
+
+      <!-- Discreet Gear Button -->
+      <button
+        id="settings-btn"
+        class="icon-btn"
+        type="button"
+        aria-label="Einstellungen"
+        title="Einstellungen"
+      >
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Optional Demo Slider (shown only when Demo Mode is active) -->
+    <div id="demo-bar" class="demo-bar" hidden>
+      <span>Demo-Pegel</span>
+      <input id="demo-slider" type="range" min="0" max="100" value="8" />
+    </div>
+
+    <!-- One-tap Resume Pill if iOS suspends audio after lock/switch -->
+    <button id="resume-pill" class="resume-pill" type="button" hidden>
+      Mikrofon fortsetzen
+    </button>
+
+    <!-- Start / Microphone Permission Overlay -->
+    <div id="start-overlay" class="start-overlay">
+      <div class="start-card">
+        <div class="start-badge" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c7eb9e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+            <line x1="12" y1="19" x2="12" y2="22"></line>
+          </svg>
+        </div>
+        <h1>Scheue Waldtiere</h1>
+        <p>
+          Ist es still, trauen sich Hase, Reh, Dachs und Igel auf die Lichtung.
+          Wird es zu laut, raschelt der Wind und sie verstecken sich.
+        </p>
+
+        <div id="security-notice" class="notice-box" hidden></div>
+
+        <button id="start-mic-btn" class="primary-btn" type="button">
+          Wald lauschen lassen
+        </button>
+        <button id="start-demo-btn" class="secondary-link" type="button">
+          Ohne Mikrofon testen
+        </button>
+      </div>
+    </div>
+
+    <!-- Calibration & Settings Sheet -->
+    <div id="settings-backdrop" class="settings-backdrop" hidden>
+      <div class="settings-sheet" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+        <div class="sheet-header">
+          <h2 id="settings-title">Einstellungen</h2>
+          <button id="close-settings-btn" class="close-btn" type="button" aria-label="Schließen">&times;</button>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-label-row">
+            <label for="sensitivity-slider">Mikrofon-Empfindlichkeit</label>
+            <span id="sensitivity-val" class="setting-value">100%</span>
+          </div>
+          <input id="sensitivity-slider" type="range" min="35" max="220" value="100" />
+          <div class="calib-track" title="Aktueller Raumpegel und Schwellenwerte">
+            <div id="calib-fill" class="calib-fill"></div>
+          </div>
+          <div class="calib-markers">
+            <span style="left: 28%">Hase</span>
+            <span style="left: 42%">Reh</span>
+            <span style="left: 56%">Dachs</span>
+            <span style="left: 72%">Igel</span>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-label-row">
+            <label for="quiet-time-slider">Ruhezeit bis zur Rückkehr</label>
+            <span id="quiet-time-val" class="setting-value">8 s</span>
+          </div>
+          <input id="quiet-time-slider" type="range" min="3" max="30" value="8" />
+        </div>
+
+        <div class="toggle-row">
+          <span>Demo-Modus (Schieberegler statt Mikrofon)</span>
+          <label class="switch">
+            <input id="demo-toggle" type="checkbox" />
+            <span class="slider-toggle"></span>
+          </label>
+        </div>
+
+        <div class="iphone-tip">
+          <strong>Tipp für das iPhone (Offline):</strong> Einmal über Safari (HTTPS) öffnen und über
+          <em>Teilen → Zum Home-Bildschirm</em> speichern. Danach läuft die App komplett ohne Internet.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
