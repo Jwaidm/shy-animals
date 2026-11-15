@@ -143,24 +143,24 @@
     const h = window.innerHeight || 844;
     const aspect = w / h;
 
-    // Guarantee central clearing (x: ~520..1080, y: ~460..1190) is always framed
-    const minStageW = 555;
-    const minStageH = 740;
+    // Guarantee central clearing (x: ~520..1080, y: ~480..1185) is framed up-close & cozy
+    const minStageW = 540;
+    const minStageH = 685;
 
     let vw = Math.max(minStageW, minStageH * aspect);
     let vh = vw / aspect;
 
-    if (vw > 1600) {
-      vw = 1600;
-      vh = 1600 / aspect;
+    if (vw > 1520) {
+      vw = 1520;
+      vh = 1520 / aspect;
     }
-    if (vh > 1200) {
-      vh = 1200;
-      vw = 1200 * aspect;
+    if (vh > 1140) {
+      vh = 1140;
+      vw = 1140 * aspect;
     }
 
     const vx = 800 - vw / 2;
-    const vy = Math.max(0, Math.min(1200 - vh, 1192 - vh));
+    const vy = Math.max(0, Math.min(1200 - vh, 1188 - vh));
 
     camera.vx = vx;
     camera.vy = vy;
@@ -496,19 +496,37 @@
     }
   }
 
-  // Fireflies (peaceful sun-motes) & Wind-blown Leaves
+  // Fireflies (peaceful sun-motes), Cute Butterflies & Wind-blown Leaves
   const fireflies = [];
+  const butterflies = [];
   const leaves = [];
   const gusts = [];
 
-  for (let i = 0; i < 26; i++) {
+  for (let i = 0; i < 30; i++) {
     fireflies.push({
       sx: 500 + Math.random() * 600,
       sy: 340 + Math.random() * 720,
       vx: (Math.random() - 0.5) * 14,
       vy: -6 - Math.random() * 10,
       phase: Math.random() * Math.PI * 2,
-      size: 1.8 + Math.random() * 2.4
+      size: 2.0 + Math.random() * 2.5
+    });
+  }
+
+  const butterflyPalette = [
+    { upper: "#ffe066", lower: "#ffd43b" },
+    { upper: "#ffb3c6", lower: "#ff8fab" },
+    { upper: "#a8dadc", lower: "#89c2d9" }
+  ];
+
+  for (let i = 0; i < 3; i++) {
+    butterflies.push({
+      homeX: 675 + i * 115,
+      homeY: 745 + (i % 2) * 115,
+      sx: 675 + i * 115,
+      sy: 745 + (i % 2) * 115,
+      phase: i * 2.1,
+      colors: butterflyPalette[i % butterflyPalette.length]
     });
   }
 
@@ -547,6 +565,50 @@
         ctx.beginPath();
         ctx.arc(pos.x, pos.y, f.size * 4.2, 0, Math.PI * 2);
         ctx.fill();
+      }
+
+      // 1b. Cute Fluttering Meadow Butterflies (glide gently when calm, hide upward when loud)
+      for (let i = 0; i < butterflies.length; i++) {
+        const b = butterflies[i];
+        const t = timeSec * 0.65 + b.phase;
+        const scareLift = Math.max(0, (1 - calmFactor) * 180);
+        const targetX = b.homeX + Math.sin(t) * 65 + Math.cos(t * 1.7) * 28;
+        const targetY = b.homeY + Math.cos(t * 1.3) * 38 + Math.sin(t * 2.1) * 16 - scareLift;
+
+        b.sx += (targetX - b.sx) * Math.min(1, dt * 3.5);
+        b.sy += (targetY - b.sy) * Math.min(1, dt * 3.5);
+
+        const bp = svgToScreen(b.sx, b.sy);
+        const flap = 0.25 + 0.75 * Math.abs(Math.sin(timeSec * 8.5 + b.phase));
+        const bAlpha = Math.min(0.92, calmFactor * 1.05);
+        const tilt = Math.cos(t) * 0.28;
+
+        ctx.save();
+        ctx.translate(bp.x, bp.y);
+        ctx.rotate(tilt);
+        ctx.globalAlpha = bAlpha;
+
+        // Left & right upper wings
+        ctx.fillStyle = b.colors.upper;
+        ctx.beginPath();
+        ctx.ellipse(-4.5 * flap, -2.5, 5.8 * flap, 4.2, -0.35, 0, Math.PI * 2);
+        ctx.ellipse(4.5 * flap, -2.5, 5.8 * flap, 4.2, 0.35, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Left & right lower wings
+        ctx.fillStyle = b.colors.lower;
+        ctx.beginPath();
+        ctx.ellipse(-3.4 * flap, 2.5, 4.2 * flap, 3.2, 0.3, 0, Math.PI * 2);
+        ctx.ellipse(3.4 * flap, 2.5, 4.2 * flap, 3.2, -0.3, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Tiny body
+        ctx.fillStyle = "#3d2c22";
+        ctx.beginPath();
+        ctx.ellipse(0, 0, 1.1, 4.2, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
       }
     }
 
